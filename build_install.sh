@@ -15,8 +15,9 @@ nice ionice make oldconfig -j$(nproc)
 nice ionice make EXTRAVERSION=`uname -r|sed "s/$KVER//"` modules_prepare -j$(nproc)
 patch -p1 < ../thinkpad_acpi.2ndfan.patch/thinkpad_acpi.2ndfan.patch
 nice ionice make M=drivers/platform/x86 -j$(nproc)
+rm ../thinkpad_acpi.ko
 cp -v drivers/platform/x86/thinkpad_acpi.ko ../
-modinfo ./thinkpad_acpi.ko
+modinfo ../thinkpad_acpi.ko
 make clean
 cd ..
 rm -rf linux-$KVER linux-$KVER.tar.xz
